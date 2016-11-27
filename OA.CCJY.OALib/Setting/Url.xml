@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<CCOA.Url>
+  <System>
+    <Domain>http://oa.ccjy.cn</Domain>
+    <Login.Post>/ispirit/default/login</Login.Post>
+    <Login.Index>/ispirit/default/index</Login.Index>
+  </System>
+  <Document>
+    <Email>/email</Email>
+    <EmailPage>/email/inbox/index/ajax/email_list/Email_page/</EmailPage>
+    <EmailView>/email/inbox/view/id/</EmailView>
+    <EmailTransmit>/email/create/transmit/id/{0}/action/inbox</EmailTransmit>
+    <EmailCreate>/email/create</EmailCreate>
+    <Document>/document/default</Document>
+    <DocumentPage>/document/default/index/Document_page/</DocumentPage>
+    <DocumentReadPage>/document/read/index/status/</DocumentReadPage>
+  </Document>
+</CCOA.Url>

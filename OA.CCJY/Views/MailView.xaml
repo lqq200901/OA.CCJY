@@ -1,0 +1,130 @@
+﻿<UserControl x:Class="OA.CCJY.Views.MailView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:OA.CCJY.Views"
+             xmlns:converter="clr-namespace:OA.CCJY.ViewModels"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="440">
+    <UserControl.Resources>
+        <converter:DateConverter x:Key="dateConverter"/>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="28"/>
+            <RowDefinition/>
+            <RowDefinition Height="100"/>
+        </Grid.RowDefinitions>
+        <ToolBarTray Grid.Row="0">
+            <ToolBar x:Name="myToolBar">
+                <Button Command="{Binding RefreshMailListCommand}">
+                    <Grid Height="18">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="18"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Image Source="/Icon/Refresh.png"/>
+                        <TextBlock Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center">刷新</TextBlock>
+                    </Grid>
+                </Button>
+                <Separator/>
+                <Button Command="{Binding TransmitMailCommand}">
+                    <Grid Height="18">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="18"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Image Source="/Icon/forward.png"/>
+                        <TextBlock Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center">转发</TextBlock>
+                    </Grid>
+                </Button>
+                <Button Command="{Binding AllCommand}">
+                    <Grid Height="18">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="18"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Image Source="/Icon/ToDo.png"/>
+                        <TextBlock Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center">安排</TextBlock>
+                    </Grid>
+                </Button>
+            </ToolBar>
+        </ToolBarTray>
+        <DataGrid x:Name="dataGrid" Grid.Row="1" CanUserResizeColumns="False" CanUserResizeRows="False"  SelectionMode="Single" AutoGenerateColumns="False" 
+                  CanUserReorderColumns="False" AlternationCount="2"  RowHeaderWidth="0" CanUserAddRows="False" BorderThickness="0" IsReadOnly="True"
+                  HorizontalGridLinesBrush="#FFDADADA" VerticalGridLinesBrush="LightGray" ItemsSource="{Binding MailList}" SelectedItem="{Binding SelectFile}" 
+                  >
+            <DataGrid.Columns>
+                <DataGridTemplateColumn Header="阅">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Image Source="{Binding State,Converter={StaticResource dateConverter}}" Width="16" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Header="标题"   Width="250" Binding="{Binding Title}">
+                    <DataGridTextColumn.CellStyle>
+                        <Style TargetType="DataGridCell">
+                            <Setter Property="ToolTip">
+                                <Setter.Value>
+                                    <TextBlock Text="{Binding Title}"></TextBlock>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </DataGridTextColumn.CellStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="发件人"  Width="50" Binding="{Binding SenderName}">
+                <DataGridTextColumn.CellStyle>
+                    <Style TargetType="DataGridCell">
+                        <Setter Property="ToolTip">
+                            <Setter.Value>
+                                    <TextBlock Text="{Binding SenderName}"></TextBlock>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </DataGridTextColumn.CellStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="日期"  Width="80" Binding="{Binding SendDate,StringFormat='\{0:yyyy-MM-dd\}'}" SortDirection="Descending"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Grid Grid.Row="2">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="38"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="35"/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="60"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" Text="正文"/>
+            <TextBlock Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" Text="附件"/>
+            <TextBox Grid.Row="0" Grid.Column="1" Margin="0,5" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" 
+                     Text="{Binding SelectedItem.Content, ElementName=dataGrid}" IsReadOnly="True">
+                <TextBox.Resources>
+                    <VisualBrush x:Key="HelpBrush" TileMode="None" Opacity="0.3" Stretch="None" AlignmentX="Left">
+                        <VisualBrush.Visual>
+                            <TextBlock  Text="邮件没有正文内容"/>
+                        </VisualBrush.Visual>
+                    </VisualBrush>
+                </TextBox.Resources>
+                <TextBox.Style>
+                    <Style TargetType="TextBox">
+                        <Style.Triggers>
+                            <Trigger Property="Text" Value="{x:Null}">
+                                <Setter Property="Background" Value="{StaticResource HelpBrush}"/>
+                            </Trigger>
+                            <Trigger Property="Text" Value="">
+                                <Setter Property="Background" Value="{StaticResource HelpBrush}"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBox.Style>
+            </TextBox>
+            <ComboBox Grid.Row="1" Grid.Column="1" Margin="0,5" ItemsSource="{Binding SelectedItem.Attachs, ElementName=dataGrid}"
+                      DisplayMemberPath="Name" SelectedValuePath="Path" SelectedIndex="0" VerticalContentAlignment="Center"
+                      SelectionChanged="ComboBox_SelectionChanged"/>
+        </Grid>
+    </Grid>
+</UserControl>

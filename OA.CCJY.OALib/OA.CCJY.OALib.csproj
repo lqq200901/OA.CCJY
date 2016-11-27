@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{B9A5A9E5-65E4-4E68-B06A-490D367A4F2A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>OA.CCJY.OALib</RootNamespace>
+    <AssemblyName>OA.CCJY.OALib</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CCOA.cs" />
+    <Compile Include="CCOAEvens.cs" />
+    <Compile Include="Item\Attach.cs" />
+    <Compile Include="Item\CCOAFile.cs" />
+    <Compile Include="Item\Contacts\CCOAContacts.cs" />
+    <Compile Include="Item\Contacts\Contact.cs" />
+    <Compile Include="Item\Document\CCOADocument.cs" />
+    <Compile Include="Item\Document\DocumentFile.cs" />
+    <Compile Include="Item\ICCOAFile.cs" />
+    <Compile Include="Item\Mail\Attachment.cs" />
+    <Compile Include="Item\Mail\CCOAMail.cs" />
+    <Compile Include="Item\Mail\EmailContentObject.cs" />
+    <Compile Include="Item\Mail\MailFile.cs" />
+    <Compile Include="Item\Mail\NewMailParameter.cs" />
+    <Compile Include="Item\Mail\TRemindObject.cs" />
+    <Compile Include="Item\Other\AsyncObservableCollection.cs" />
+    <Compile Include="Item\Other\SendFileMultipartBodyProvider.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Setting\Regulars.cs" />
+    <Compile Include="Setting\GetUrl.cs" />
+    <Compile Include="Setting\State.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Setting\Org.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Setting\State.xml" />
+    <Content Include="Setting\Url.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="Setting\Regular.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\JumpKick.HttpLib\JumpKick.HttpLib\JumpKick.HttpLib.csproj">
+      <Project>{d626c4ec-d793-4541-8631-1af678a29490}</Project>
+      <Name>JumpKick.HttpLib</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

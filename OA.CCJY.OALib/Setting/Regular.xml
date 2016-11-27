@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Regular>
+  <Email>
+    <InboxMailList>(?&lt;State&gt;已阅|未阅读).+?ellipsis.+?data-id="(?&lt;userId&gt;.+?)".+?title="(?&lt;title&gt;.+?)".+?(?&lt;date&gt;\d{4}/\d{2}/\d{2}).+?reply/id/(?&lt;docId&gt;\d*)/</InboxMailList>
+    <InboxInfo>有(?&lt;UnreadMail&gt;\d*)封未读邮件.+?共(?&lt;MailCount&gt;\d*)条.+?&gt;(?&lt;CurrentPage&gt;\d*)/(?&lt;TotalPage&gt;\d*)&lt;</InboxInfo>
+    <EmailDetailContent>MultiFile-title.+?&gt;(?&lt;content&gt;.+?)&lt;</EmailDetailContent>
+    <EmailDetailAttachment>attachment-wrapper.+?attachment/index/id/(?&lt;id&gt;\d*)/.+?img.+?&gt;(?&lt;filename&gt;.+?)&lt;.+?href="(?&lt;url&gt;.+?)"&gt;下载</EmailDetailAttachment>
+  </Email>
+  <Document>
+    <DocumentList>ellipsis.+?(((?&lt;day&gt;\d*)天)?((?&lt;hour&gt;\d*)小时)?((?&lt;minute&gt;\d*)分)).+?【(?&lt;category&gt;.+?)--(?&lt;level&gt;.+?)】.+?href.+?id/(?&lt;docId&gt;\d*).+?&gt;(?&lt;title&gt;.+?)&lt;/a&gt;.+?ellipsis.+?&gt;(?&lt;sender&gt;.+?)&lt;/td&gt;</DocumentList>
+    <DocumentReadList>ellipsis.+?title="(?&lt;title&gt;.+?)".+?/id/(?&lt;id&gt;\d*)/.+?(?&lt;date&gt;\d*-\d*-\d* \d*:\d*:\d*)</DocumentReadList>
+  </Document>
+</Regular>
